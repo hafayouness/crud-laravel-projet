@@ -36,7 +36,28 @@ class EtudiantController extends Controller
     }
     
     public function update_etudiant($id){
-        return view('etudiant.update');
+        $etudiants = Etudiant::find($id);
+        return view('etudiant.update',compact('etudiants'));
 
     }
+    public function update_etudiant_traitement(Request $request){
+        $request ->validate([
+            "nom"=> "required|string|max:255",
+            "prenom"=>"required|string|max:255",
+            "classe"=>"required|string|max:255",
+        ]);
+        $etudiant = Etudiant::find($request->id);
+        $etudiant->nom = $request->input('nom');
+        $etudiant->prenom = $request->input('prenom');
+        $etudiant->classe = $request->input('classe');
+        $etudiant->update(); 
+          
+        return redirect('/etudiant')->with('status', "L'étudiant a bien été  modifier avec succès !");
+    }
+    public function delete_etudiant($id){
+        $etudiant = Etudiant::find($id);
+        $etudiant->delete();
+        return redirect('/etudiant')->with('status', "L'étudiant a bien été  supprimer avec succès !");
+    }
+    
 }

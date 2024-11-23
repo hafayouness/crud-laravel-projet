@@ -5,22 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Crud Projet</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <style>
+    .fade-alert {
+      animation: fadeOut 2.5s ease-in-out forwards; 
+  }
+
+  
+  @keyframes fadeOut {
+      0% {
+          opacity: 1; 
+      }
+      80% {
+          opacity: 1;
+      }
+      100% {
+          opacity: 0; 
+      }
+  }
+</style>
   </head>
   <body>
     <div class="vh-100 d-flex flex-column justify-content-center" style="max-width: 500px; margin: 0 auto;">
       <h1 class="text-center mb-3">Ajouter un Etudiant </h1>
 
-      {{-- @if(session("status"))
-      <div class="alert alert-success">
-       {{ session("status") }}
-      </div>
-      @endif
-
-      <ul class="list-unstyled">
-        @foreach ($errors->all() as $error)
-         <li class="alert alert-danger">{{ $error }}</li>
-        @endforeach
-      </ul> --}}
+     
 
       <form action="/ajouter/traitement" method="POST" class="mb-3">
         @csrf
@@ -56,7 +65,7 @@
   
        {{-- --succes-- --}}
         @if(session("status"))
-        <div class="alert alert-success">
+        <div class="alert alert-success fade-alert text-center">
           {{ session("status") }}
         </div>
         @endif
